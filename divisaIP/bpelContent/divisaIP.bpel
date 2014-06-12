@@ -49,12 +49,40 @@
         <!-- Receive input from requester. 
              Note: This maps to operation defined in divisaIP.wsdl 
              -->
-        <bpel:receive name="receiveInput" partnerLink="client"
+        <bpel:receive name="recibirIP" partnerLink="client"
                  portType="tns:divisaIP"
                  operation="process" variable="input"
                  createInstance="yes"/>
         
         <!-- Generate reply to synchronous request -->
+        <bpel:assign validate="no" name="asignar_IP_servicio"></bpel:assign>
+        <bpel:invoke name="llamada_GeometryInfo"></bpel:invoke>
+        <bpel:assign validate="no" name="asignar_CiudadPais_servicio"></bpel:assign>
+        <bpel:invoke name="llamada_CountryInfoService"></bpel:invoke>
+        <bpel:assign validate="no" name="asignar_divisa_servicio"></bpel:assign>
+        <bpel:if name="if">
+            <bpel:sequence name="Sequence">
+                <bpel:invoke name="llamada_CurrencyConvertor"></bpel:invoke>
+                <bpel:assign validate="no" name="asignar_divisaAEuro_servicio"></bpel:assign>
+                <bpel:reply name="devolver_cambioDivisa"></bpel:reply>
+            </bpel:sequence>
+            <bpel:else>
+                <bpel:sequence name="Sequence1">
+                    <bpel:invoke name="llamada_CountryInfoService_EUR"></bpel:invoke>
+                    <bpel:assign validate="no" name="asignar_PaisesEUR_servicio"></bpel:assign>
+                    
+                    <bpel:forEach parallel="no" counterName="Counter" name="ForEach">
+                        <bpel:scope>
+                            <bpel:sequence>
+                                <bpel:invoke name="llamada_CountryInfoService_idiomas"></bpel:invoke>
+                                <bpel:assign validate="no" name="asignar_idiomaPais_servicio"></bpel:assign>
+                                <bpel:reply name="devolver_idiomaPais"></bpel:reply>
+                            </bpel:sequence>
+                        </bpel:scope>
+                    </bpel:forEach>
+                </bpel:sequence>
+            </bpel:else>
+        </bpel:if>
         <bpel:reply name="replyOutput" 
                partnerLink="client"
                portType="tns:divisaIP"
