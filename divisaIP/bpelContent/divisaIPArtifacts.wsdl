@@ -42,6 +42,7 @@
                     	<element name="idiomaPais" type="string"></element>
                     	<element name="cambio" type="float"></element>
                     	<element name="isoPais" type="string"></element>
+                    	<element name="mensaje" type="string"></element>
                     </sequence>
                 </complexType>
             </element>
