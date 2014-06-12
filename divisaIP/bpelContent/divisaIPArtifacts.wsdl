@@ -1,11 +1,5 @@
-<?xml version="1.0"?>
-<definitions name="divisaIP"
-        targetNamespace="http://ws.divisaip.tps"
-        xmlns:tns="http://ws.divisaip.tps"
-        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-        xmlns="http://schemas.xmlsoap.org/wsdl/"
-        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-        >
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.divisaip.tps" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://www.DynGeometry.com/WebService/" xmlns:wsdl1="http://www.oorsprong.org/websamples.countryinfo" xmlns:wsdl2="http://www.webserviceX.NET/" name="divisaIP" targetNamespace="http://ws.divisaip.tps">
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      TYPE DEFINITION - List of types participating in this BPEL process 
@@ -13,10 +7,20 @@
      but you can define or import any XML Schema type and use them as part 
      of the message types.
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="GeometryInfoPLT">
+    <plnk:role name="GeometryInfoPLRole" portType="wsdl:GeometryInfoSoap"/>
+  </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="CountryInfoServicePLT">
+    <plnk:role name="CountryInfoServicePLRole" portType="wsdl1:CountryInfoServiceSoapType"/>
+  </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="CurrencyConvertorPLT">
+    <plnk:role name="CurrencyConvertorPLRole" portType="wsdl2:CurrencyConvertorSoap"/>
+  </plnk:partnerLinkType>
+    <import location="GeometryInfo.wsdl" namespace="http://www.DynGeometry.com/WebService/"/>
+    <import location="CountryInfoService.wsdl" namespace="http://www.oorsprong.org/websamples.countryinfo"/>
+    <import location="CurrencyConvertor.wsdl" namespace="http://www.webserviceX.NET/"/>
     <types>
-        <schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
-                targetNamespace="http://ws.divisaip.tps" 
-                xmlns="http://www.w3.org/2001/XMLSchema">
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.divisaip.tps">
 
             <element name="divisaIPRequest">
                 <complexType>
@@ -42,10 +46,10 @@
      part of the port type defintions
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
     <message name="divisaIPRequestMessage">
-        <part name="payload" element="tns:divisaIPRequest"/>
+        <part element="tns:divisaIPRequest" name="payload"/>
     </message>
     <message name="divisaIPResponseMessage">
-        <part name="payload" element="tns:divisaIPResponse"/>
+        <part element="tns:divisaIPResponse" name="payload"/>
     </message>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,7 +60,7 @@
     <!-- portType implemented by the divisaIP BPEL process -->
     <portType name="divisaIP">
         <operation name="process">
-            <input  message="tns:divisaIPRequestMessage" />
+            <input message="tns:divisaIPRequestMessage"/>
             <output message="tns:divisaIPResponseMessage"/>
         </operation>
     </portType>   
@@ -73,16 +77,14 @@
      for a web service.
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <binding name="divisaIPBinding" type="tns:divisaIP">
-    	<soap:binding style="document"
-    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     	<operation name="process">
-    		<soap:operation
-    			soapAction="http://ws.divisaip.tps/process" />
+    		<soap:operation soapAction="http://ws.divisaip.tps/process"/>
     		<input>
-    			<soap:body use="literal" />
+    			<soap:body use="literal"/>
     		</input>
     		<output>
-    			<soap:body use="literal" />
+    			<soap:body use="literal"/>
     		</output>
     	</operation>
     </binding>
@@ -92,8 +94,8 @@
      a service unit.
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <service name="divisaIPService">
-    	<port name="divisaIPPort" binding="tns:divisaIPBinding">
-    		<soap:address location="http://localhost:8080/divisaIP" />
+    	<port binding="tns:divisaIPBinding" name="divisaIPPort">
+    		<soap:address location="http://localhost:8080/divisaIP"/>
     	</port>
     </service>
 </definitions>

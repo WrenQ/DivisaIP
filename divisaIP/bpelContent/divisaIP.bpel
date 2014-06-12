@@ -5,7 +5,7 @@
          suppressJoinFailure="yes"
          xmlns:tns="http://ws.divisaip.tps"
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
-         >
+         xmlns:ns="http://www.DynGeometry.com/WebService/" xmlns:ns0="http://www.oorsprong.org/websamples.countryinfo" xmlns:ns1="http://www.webserviceX.NET/">
 
     <!-- Import the client WSDL -->
 	<bpel:import location="divisaIPArtifacts.wsdl" namespace="http://ws.divisaip.tps" 
@@ -21,6 +21,9 @@
                      partnerLinkType="tns:divisaIP"
                      myRole="divisaIPProvider"
                      />
+        <bpel:partnerLink name="GeometryInfoPL" partnerLinkType="tns:GeometryInfoPLT" partnerRole="GeometryInfoPLRole"></bpel:partnerLink>
+        <bpel:partnerLink name="CountryInfoServicePL" partnerLinkType="tns:CountryInfoServicePLT" partnerRole="CountryInfoServicePLRole"></bpel:partnerLink>
+        <bpel:partnerLink name="CurrencyConvertorPL" partnerLinkType="tns:CurrencyConvertorPLT" partnerRole="CurrencyConvertorPLRole"></bpel:partnerLink>
     </bpel:partnerLinks>
   
     <!-- ================================================================= -->         
@@ -37,6 +40,14 @@
           -->
         <bpel:variable name="output"
                   messageType="tns:divisaIPResponseMessage"/>
+        <bpel:variable name="GeometryInfoPLResponse" messageType="ns:IPQuerySoapOut"></bpel:variable>
+        <bpel:variable name="GeometryInfoPLRequest" messageType="ns:IPQuerySoapIn"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLResponse" messageType="ns0:CountryCurrencySoapResponse"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLRequest" messageType="ns0:CountryCurrencySoapRequest"></bpel:variable>
+        <bpel:variable name="CurrencyConvertorPLResponse" messageType="ns1:ConversionRateSoapOut"></bpel:variable>
+        <bpel:variable name="CurrencyConvertorPLRequest" messageType="ns1:ConversionRateSoapIn"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLResponse1" messageType="ns0:CountriesUsingCurrencySoapResponse"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLRequest1" messageType="ns0:CountriesUsingCurrencySoapRequest"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -56,28 +67,32 @@
         
         <!-- Generate reply to synchronous request -->
         <bpel:assign validate="no" name="asignar_IP_servicio"></bpel:assign>
-        <bpel:invoke name="llamada_GeometryInfo"></bpel:invoke>
+        <bpel:invoke name="llamada_GeometryInfo" partnerLink="GeometryInfoPL" operation="IPQuery" portType="ns:GeometryInfoSoap" inputVariable="GeometryInfoPLRequest" outputVariable="GeometryInfoPLResponse"></bpel:invoke>
         <bpel:assign validate="no" name="asignar_CiudadPais_servicio"></bpel:assign>
-        <bpel:invoke name="llamada_CountryInfoService"></bpel:invoke>
+        <bpel:invoke name="llamada_CountryInfoService" partnerLink="CountryInfoServicePL" operation="CountryCurrency" portType="ns0:CountryInfoServiceSoapType" inputVariable="CountryInfoServicePLRequest" outputVariable="CountryInfoServicePLResponse"></bpel:invoke>
         <bpel:assign validate="no" name="asignar_divisa_servicio"></bpel:assign>
         <bpel:if name="if">
             <bpel:sequence name="Sequence">
-                <bpel:invoke name="llamada_CurrencyConvertor"></bpel:invoke>
+                <bpel:invoke name="llamada_CurrencyConvertor" partnerLink="CurrencyConvertorPL" operation="ConversionRate" portType="ns1:CurrencyConvertorSoap" inputVariable="CurrencyConvertorPLRequest" outputVariable="CurrencyConvertorPLResponse"></bpel:invoke>
                 <bpel:assign validate="no" name="asignar_divisaAEuro_servicio"></bpel:assign>
                 <bpel:reply name="devolver_cambioDivisa"></bpel:reply>
             </bpel:sequence>
             <bpel:else>
                 <bpel:sequence name="Sequence1">
-                    <bpel:invoke name="llamada_CountryInfoService_EUR"></bpel:invoke>
+                    <bpel:invoke name="llamada_CountryInfoService_EUR" partnerLink="CountryInfoServicePL" operation="CountriesUsingCurrency" portType="ns0:CountryInfoServiceSoapType" inputVariable="CountryInfoServicePLRequest1" outputVariable="CountryInfoServicePLResponse1"></bpel:invoke>
                     <bpel:assign validate="no" name="asignar_PaisesEUR_servicio"></bpel:assign>
                     
                     <bpel:forEach parallel="no" counterName="Counter" name="ForEach">
                         <bpel:scope>
                             <bpel:sequence>
-                                <bpel:invoke name="llamada_CountryInfoService_idiomas"></bpel:invoke>
+                                <bpel:invoke name="llamada_CountryInfoService_idiomas" partnerLink="CountryInfoServicePL" operation="FullCountryInfo" portType="ns0:CountryInfoServiceSoapType" inputVariable="CountryInfoServicePLRequest2" outputVariable="CountryInfoServicePLResponse2"></bpel:invoke>
                                 <bpel:assign validate="no" name="asignar_idiomaPais_servicio"></bpel:assign>
                                 <bpel:reply name="devolver_idiomaPais"></bpel:reply>
                             </bpel:sequence>
+                            <bpel:variables>
+                                <bpel:variable name="CountryInfoServicePLResponse2" messageType="ns0:FullCountryInfoSoapResponse"></bpel:variable>
+                                <bpel:variable name="CountryInfoServicePLRequest2" messageType="ns0:FullCountryInfoSoapRequest"></bpel:variable>
+                            </bpel:variables>
                         </bpel:scope>
                     </bpel:forEach>
                 </bpel:sequence>
