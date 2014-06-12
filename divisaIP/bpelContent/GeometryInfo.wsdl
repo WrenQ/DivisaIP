@@ -1,0 +1,1785 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.DynGeometry.com/WebService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.DynGeometry.com/WebService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.DynGeometry.com/WebService/">
+      <s:element name="GetZip">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="zip5" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZipResult" type="tns:ZipInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZipInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCity" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="highth_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="width_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="area_Mi" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geom" type="tns:ArrayOfPoint"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPoint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Point" nillable="true" type="tns:Point"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Point">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="x" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="y" type="s:double"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetZipBuffer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="zip5" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="bufferMile" type="s:double"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZipBufferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZipBufferResult" type="tns:ZipBufferInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZipBufferInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCity" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bufferMiles" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="neighborCount" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="neighborZips" type="tns:ArrayOfZip"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZip">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Zip" nillable="true" type="tns:Zip"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Zip">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCity" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetZipNeighborCity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="zip5" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="bufferMile" type="s:double"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZipNeighborCityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZipNeighborCityResult" type="tns:ZipNeighborCityInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZipNeighborCityInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCity" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bufferMiles" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="neighborCount" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="neighborCities" type="tns:ArrayOfCensusCity"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCensusCity">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CensusCity" nillable="true" type="tns:CensusCity"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CensusCity">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cityFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cityName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCounty">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="countyName" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="stateAbbr" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="fips" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountyResult" type="tns:CountyInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CountyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="countyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countyFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="pop2005" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="houseHolds" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="avg_Sale97" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="highth_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="width_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="area_Mi" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geom" type="tns:ArrayOfPoint"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cityName" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="stateAbbr" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="fips" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCityResult" type="tns:CityInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CityInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cityName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cityFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="highth_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="width_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="area_Mi" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geom" type="tns:ArrayOfPoint"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCityBuffer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cityName" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="stateAbbr" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="bufferMile" type="s:double"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCityBufferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCityBufferResult" type="tns:CityBufferInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CityBufferInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cityName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cityFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bufferMiles" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="neighborCount" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="neighborCities" type="tns:ArrayOfCensusCity"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCityNeighborZip">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cityName" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="stateAbbr" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="bufferMile" type="s:double"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCityNeighborZipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCityNeighborZipResult" type="tns:CityNeighborZipInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CityNeighborZipInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cityName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cityFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bufferMiles" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="neighborCount" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="neighborZips" type="tns:ArrayOfZip"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSchoolDistrict">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictName" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="stateAbbr" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictID" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSchoolDistrictResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSchoolDistrictResult" type="tns:SchoolDistrictInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SchoolDistrictInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictUnifiedName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictUnifiedID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictSecondaryName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictSecondaryID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictElementaryName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictElementaryID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="enrollment" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="highth_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="width_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="area_Mi" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geom" type="tns:ArrayOfPoint"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCensusTract">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="censusTractID" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCensusTractResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCensusTractResult" type="tns:CensusTractInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CensusTractInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="censusTractFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="population" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="households" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="centerY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="minY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxX" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="maxY" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="highth_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="width_Mi" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="area_Mi" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geom" type="tns:ArrayOfPoint"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Geocode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="street" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="zip" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GeocodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GeocodeResult" type="tns:Address"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoStreet" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoCity" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoState" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoZipcode" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="geocodeLevel" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GeocodePro">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="street" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="zip" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GeocodeProResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GeocodeProResult" type="tns:AddressInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AddressInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoStreet" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoCity" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoState" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="geoZipcode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="censusCity" type="tns:CensusCity"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="tns:State"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="tns:Zip"/>
+          <s:element minOccurs="0" maxOccurs="1" name="county" type="tns:County"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countySubdivision" type="tns:CountySubdivision"/>
+          <s:element minOccurs="0" maxOccurs="1" name="censusTractFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="blockGroupFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="coreBasedStatisticalArea" type="tns:CoreBasedStatisticalArea"/>
+          <s:element minOccurs="0" maxOccurs="1" name="combinedStatisticalArea" type="tns:CombinedStatisticalArea"/>
+          <s:element minOccurs="0" maxOccurs="1" name="metropolitanDivision" type="tns:MetropolitanDivision"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrict" type="tns:SchoolDistrict"/>
+          <s:element minOccurs="0" maxOccurs="1" name="trafficZone" type="tns:TrafficZone"/>
+          <s:element minOccurs="0" maxOccurs="1" name="votingDistrict" type="tns:VotingDistrict"/>
+          <s:element minOccurs="0" maxOccurs="1" name="areaCode" type="tns:AreaCode"/>
+          <s:element minOccurs="1" maxOccurs="1" name="geocodeLevel" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="State">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="stateFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="stateName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="stateAbbr" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="County">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="countyFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CountySubdivision">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="countySubdivisionName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countySubdivisionFIPS" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CoreBasedStatisticalArea">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CBSAName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CBSAID" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CombinedStatisticalArea">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CSAName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CSAID" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MetropolitanDivision">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="METDIVName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="METDIVID" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SchoolDistrict">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictUnifiedName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictUnifiedID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictSecondaryName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictSecondaryID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictElementaryName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrictElementaryID" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TrafficZone">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="trafficZoneName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="trafficZoneID" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VotingDistrict">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="votingDistrictName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="votingDistrictID" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AreaCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="areaCode" type="tns:ArrayOfString"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="XYQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+            <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XYQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XYQueryResult" type="tns:XYInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="XYInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="censusCity" type="tns:CensusCity"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="tns:State"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="tns:Zip"/>
+          <s:element minOccurs="0" maxOccurs="1" name="county" type="tns:County"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countySubdivision" type="tns:CountySubdivision"/>
+          <s:element minOccurs="0" maxOccurs="1" name="censusTractFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="blockGroupFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="coreBasedStatisticalArea" type="tns:CoreBasedStatisticalArea"/>
+          <s:element minOccurs="0" maxOccurs="1" name="combinedStatisticalArea" type="tns:CombinedStatisticalArea"/>
+          <s:element minOccurs="0" maxOccurs="1" name="metropolitanDivision" type="tns:MetropolitanDivision"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrict" type="tns:SchoolDistrict"/>
+          <s:element minOccurs="0" maxOccurs="1" name="trafficZone" type="tns:TrafficZone"/>
+          <s:element minOccurs="0" maxOccurs="1" name="votingDistrict" type="tns:VotingDistrict"/>
+          <s:element minOccurs="0" maxOccurs="1" name="areaCode" type="tns:AreaCode"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IPQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="IP" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IPQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IPQueryResult" type="tns:IPInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IPInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IP" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IPQueryPro">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="IP" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IPQueryProResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IPQueryProResult" type="tns:IPInfoPro"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IPInfoPro">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IP" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="IPCity" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="IPState" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="IPZipCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="censusCity" type="tns:CensusCity"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="tns:State"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zipCode" type="tns:Zip"/>
+          <s:element minOccurs="0" maxOccurs="1" name="county" type="tns:County"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countySubdivision" type="tns:CountySubdivision"/>
+          <s:element minOccurs="0" maxOccurs="1" name="censusTractFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="blockGroupFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="coreBasedStatisticalArea" type="tns:CoreBasedStatisticalArea"/>
+          <s:element minOccurs="0" maxOccurs="1" name="combinedStatisticalArea" type="tns:CombinedStatisticalArea"/>
+          <s:element minOccurs="0" maxOccurs="1" name="metropolitanDivision" type="tns:MetropolitanDivision"/>
+          <s:element minOccurs="0" maxOccurs="1" name="schoolDistrict" type="tns:SchoolDistrict"/>
+          <s:element minOccurs="0" maxOccurs="1" name="trafficZone" type="tns:TrafficZone"/>
+          <s:element minOccurs="0" maxOccurs="1" name="votingDistrict" type="tns:VotingDistrict"/>
+          <s:element minOccurs="0" maxOccurs="1" name="areaCode" type="tns:AreaCode"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetWaterOrLand">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+            <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWaterOrLandResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWaterOrLandResult" type="tns:WaterOrLandInfo"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WaterOrLandInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="waterOrLandIndicator" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="waterOrLandDesc" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="waterName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="waterType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="waterArea_Mi" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nearestWaterName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nearestWaterType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nearestWaterDistance" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nearestWaterArea_Mi" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="stateName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="stateFIPS" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="countyFIPS" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="error_no" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="error_desc" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZipInfo" nillable="true" type="tns:ZipInfo"/>
+      <s:element name="ZipBufferInfo" nillable="true" type="tns:ZipBufferInfo"/>
+      <s:element name="ZipNeighborCityInfo" nillable="true" type="tns:ZipNeighborCityInfo"/>
+      <s:element name="CountyInfo" nillable="true" type="tns:CountyInfo"/>
+      <s:element name="CityInfo" nillable="true" type="tns:CityInfo"/>
+      <s:element name="CityBufferInfo" nillable="true" type="tns:CityBufferInfo"/>
+      <s:element name="CityNeighborZipInfo" nillable="true" type="tns:CityNeighborZipInfo"/>
+      <s:element name="SchoolDistrictInfo" nillable="true" type="tns:SchoolDistrictInfo"/>
+      <s:element name="CensusTractInfo" nillable="true" type="tns:CensusTractInfo"/>
+      <s:element name="Address" nillable="true" type="tns:Address"/>
+      <s:element name="AddressInfo" nillable="true" type="tns:AddressInfo"/>
+      <s:element name="XYInfo" nillable="true" type="tns:XYInfo"/>
+      <s:element name="IPInfo" nillable="true" type="tns:IPInfo"/>
+      <s:element name="IPInfoPro" nillable="true" type="tns:IPInfoPro"/>
+      <s:element name="WaterOrLandInfo" nillable="true" type="tns:WaterOrLandInfo"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetZipSoapIn">
+    <wsdl:part name="parameters" element="tns:GetZip"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipSoapOut">
+    <wsdl:part name="parameters" element="tns:GetZipResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipBufferSoapIn">
+    <wsdl:part name="parameters" element="tns:GetZipBuffer"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipBufferSoapOut">
+    <wsdl:part name="parameters" element="tns:GetZipBufferResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipNeighborCitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetZipNeighborCity"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipNeighborCitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetZipNeighborCityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCountySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCounty"/>
+  </wsdl:message>
+  <wsdl:message name="GetCountySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountyResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCity"/>
+  </wsdl:message>
+  <wsdl:message name="GetCitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityBufferSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCityBuffer"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityBufferSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCityBufferResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityNeighborZipSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCityNeighborZip"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityNeighborZipSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCityNeighborZipResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetSchoolDistrictSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSchoolDistrict"/>
+  </wsdl:message>
+  <wsdl:message name="GetSchoolDistrictSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSchoolDistrictResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCensusTractSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCensusTract"/>
+  </wsdl:message>
+  <wsdl:message name="GetCensusTractSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCensusTractResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeSoapIn">
+    <wsdl:part name="parameters" element="tns:Geocode"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GeocodeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeProSoapIn">
+    <wsdl:part name="parameters" element="tns:GeocodePro"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeProSoapOut">
+    <wsdl:part name="parameters" element="tns:GeocodeProResponse"/>
+  </wsdl:message>
+  <wsdl:message name="XYQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:XYQuery"/>
+  </wsdl:message>
+  <wsdl:message name="XYQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:XYQueryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IPQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:IPQuery"/>
+  </wsdl:message>
+  <wsdl:message name="IPQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:IPQueryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryProSoapIn">
+    <wsdl:part name="parameters" element="tns:IPQueryPro"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryProSoapOut">
+    <wsdl:part name="parameters" element="tns:IPQueryProResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetWaterOrLandSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWaterOrLand"/>
+  </wsdl:message>
+  <wsdl:message name="GetWaterOrLandSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWaterOrLandResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="zip5" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZipInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipBufferHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="zip5" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipBufferHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZipBufferInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipNeighborCityHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="zip5" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipNeighborCityHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZipNeighborCityInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCountyHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="countyName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="fips" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCountyHttpGetOut">
+    <wsdl:part name="Body" element="tns:CountyInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="cityName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="fips" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityHttpGetOut">
+    <wsdl:part name="Body" element="tns:CityInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityBufferHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="cityName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityBufferHttpGetOut">
+    <wsdl:part name="Body" element="tns:CityBufferInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityNeighborZipHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="cityName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityNeighborZipHttpGetOut">
+    <wsdl:part name="Body" element="tns:CityNeighborZipInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetSchoolDistrictHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="schoolDistrictName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="schoolDistrictID" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetSchoolDistrictHttpGetOut">
+    <wsdl:part name="Body" element="tns:SchoolDistrictInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCensusTractHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="censusTractID" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCensusTractHttpGetOut">
+    <wsdl:part name="Body" element="tns:CensusTractInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="street" type="s:string"/>
+    <wsdl:part name="city" type="s:string"/>
+    <wsdl:part name="state" type="s:string"/>
+    <wsdl:part name="zip" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:Address"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeProHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="street" type="s:string"/>
+    <wsdl:part name="city" type="s:string"/>
+    <wsdl:part name="state" type="s:string"/>
+    <wsdl:part name="zip" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeProHttpGetOut">
+    <wsdl:part name="Body" element="tns:AddressInfo"/>
+  </wsdl:message>
+  <wsdl:message name="XYQueryHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="longitude" type="s:string"/>
+    <wsdl:part name="latitude" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="XYQueryHttpGetOut">
+    <wsdl:part name="Body" element="tns:XYInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="IP" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryHttpGetOut">
+    <wsdl:part name="Body" element="tns:IPInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryProHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="IP" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryProHttpGetOut">
+    <wsdl:part name="Body" element="tns:IPInfoPro"/>
+  </wsdl:message>
+  <wsdl:message name="GetWaterOrLandHttpGetIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="longitude" type="s:string"/>
+    <wsdl:part name="latitude" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetWaterOrLandHttpGetOut">
+    <wsdl:part name="Body" element="tns:WaterOrLandInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="zip5" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZipInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipBufferHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="zip5" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipBufferHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZipBufferInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipNeighborCityHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="zip5" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetZipNeighborCityHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZipNeighborCityInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCountyHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="countyName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="fips" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCountyHttpPostOut">
+    <wsdl:part name="Body" element="tns:CountyInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="cityName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="fips" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityHttpPostOut">
+    <wsdl:part name="Body" element="tns:CityInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityBufferHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="cityName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityBufferHttpPostOut">
+    <wsdl:part name="Body" element="tns:CityBufferInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityNeighborZipHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="cityName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="bufferMile" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCityNeighborZipHttpPostOut">
+    <wsdl:part name="Body" element="tns:CityNeighborZipInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetSchoolDistrictHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="schoolDistrictName" type="s:string"/>
+    <wsdl:part name="stateAbbr" type="s:string"/>
+    <wsdl:part name="schoolDistrictID" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetSchoolDistrictHttpPostOut">
+    <wsdl:part name="Body" element="tns:SchoolDistrictInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GetCensusTractHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="censusTractID" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetCensusTractHttpPostOut">
+    <wsdl:part name="Body" element="tns:CensusTractInfo"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="street" type="s:string"/>
+    <wsdl:part name="city" type="s:string"/>
+    <wsdl:part name="state" type="s:string"/>
+    <wsdl:part name="zip" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:Address"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeProHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="street" type="s:string"/>
+    <wsdl:part name="city" type="s:string"/>
+    <wsdl:part name="state" type="s:string"/>
+    <wsdl:part name="zip" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GeocodeProHttpPostOut">
+    <wsdl:part name="Body" element="tns:AddressInfo"/>
+  </wsdl:message>
+  <wsdl:message name="XYQueryHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="longitude" type="s:string"/>
+    <wsdl:part name="latitude" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="XYQueryHttpPostOut">
+    <wsdl:part name="Body" element="tns:XYInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="IP" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryHttpPostOut">
+    <wsdl:part name="Body" element="tns:IPInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryProHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="IP" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="IPQueryProHttpPostOut">
+    <wsdl:part name="Body" element="tns:IPInfoPro"/>
+  </wsdl:message>
+  <wsdl:message name="GetWaterOrLandHttpPostIn">
+    <wsdl:part name="key" type="s:string"/>
+    <wsdl:part name="longitude" type="s:string"/>
+    <wsdl:part name="latitude" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetWaterOrLandHttpPostOut">
+    <wsdl:part name="Body" element="tns:WaterOrLandInfo"/>
+  </wsdl:message>
+  <wsdl:portType name="GeometryInfoSoap">
+    <wsdl:operation name="GetZip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip query based on 5 digit zip code. It returns the result as a object instance of ZipInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipSoapIn"/>
+      <wsdl:output message="tns:GetZipSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipBuffer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip neighbors query based on 5 digit zip code and buffer miles. It returns the result as a object instance of ZipBufferInfo which contains the list of neighbors within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipBufferSoapIn"/>
+      <wsdl:output message="tns:GetZipBufferSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipNeighborCity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip neighbor Cities query based on Zip5 and buffer miles. It returns the result as a object instance of ZipNeighborCityInfo which contains the list of neighbor cities within user defined buffer miles of zip5.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipNeighborCitySoapIn"/>
+      <wsdl:output message="tns:GetZipNeighborCitySoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;County query based on county fips or county_name + state_name. If fips is provided, it will search county based on fips. Otherwise, county_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of CountyInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCountySoapIn"/>
+      <wsdl:output message="tns:GetCountySoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City query based on city fips or City_name + state_name. If fips is provided, it will search city based on fips. Otherwise, City_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of CityInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCitySoapIn"/>
+      <wsdl:output message="tns:GetCitySoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityBuffer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City neighbors query based on city name, state and buffer miles. It returns the result as a object instance of CityBufferInfo which contains the list of neighbor cities within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityBufferSoapIn"/>
+      <wsdl:output message="tns:GetCityBufferSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityNeighborZip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City neighbor Zips query based on city name, state abbr (e.g. TX) and buffer miles. It returns the result as a object instance of ZipBufferInfo which contains the list of neighbors within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityNeighborZipSoapIn"/>
+      <wsdl:output message="tns:GetCityNeighborZipSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolDistrict">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;SchoolDistrict query based on schoolDistrict_ID or schoolDistrict_name + state_name. If schoolDistrict_ID is provided, it will search school district based on schoolDistrict_ID. Otherwise, schoolDistrict_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of SchoolDistrictInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetSchoolDistrictSoapIn"/>
+      <wsdl:output message="tns:GetSchoolDistrictSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCensusTract">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Census Tract query based on censusTract_ID. It returns the result as a object instance of CensusTractInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCensusTractSoapIn"/>
+      <wsdl:output message="tns:GetCensusTractSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="Geocode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get the x, y coordinates based on input adddress. It returns the result as a object instance of Address.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Sign up to get the key now at &lt;a href='http://www.dyngeometry.com/web/LoginOrRegister.aspx' style="color: #ff0000"&gt;www.DynGeometry.com&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GeocodeSoapIn"/>
+      <wsdl:output message="tns:GeocodeSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GeocodePro">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get the x, y coordinates, city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division  based on input adddress. It returns the result as a object instance of AddressInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GeocodeProSoapIn"/>
+      <wsdl:output message="tns:GeocodeProSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="XYQuery">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division based on input x, y coordinates. It returns the result as a object instance of XYInfo. This function is only available for USA coordinates.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Sign up to get the key now at &lt;a href='http://www.dyngeometry.com/web/LoginOrRegister.aspx' style="color: #ff0000"&gt;www.DynGeometry.com&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:XYQuerySoapIn"/>
+      <wsdl:output message="tns:XYQuerySoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="IPQuery">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;IP query based on IP Address. It returns the result as a object instance of IPInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:IPQuerySoapIn"/>
+      <wsdl:output message="tns:IPQuerySoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="IPQueryPro">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;IP query based on IP Address. It returns the result as a object instance of IPInfoPro which includes city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division. This function is only available for USA IPs.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:IPQueryProSoapIn"/>
+      <wsdl:output message="tns:IPQueryProSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterOrLand">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Determin if the location is over water or land. It returns the result as a object instance of WaterOrLandInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetWaterOrLandSoapIn"/>
+      <wsdl:output message="tns:GetWaterOrLandSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GeometryInfoHttpGet">
+    <wsdl:operation name="GetZip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip query based on 5 digit zip code. It returns the result as a object instance of ZipInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipHttpGetIn"/>
+      <wsdl:output message="tns:GetZipHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipBuffer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip neighbors query based on 5 digit zip code and buffer miles. It returns the result as a object instance of ZipBufferInfo which contains the list of neighbors within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipBufferHttpGetIn"/>
+      <wsdl:output message="tns:GetZipBufferHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipNeighborCity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip neighbor Cities query based on Zip5 and buffer miles. It returns the result as a object instance of ZipNeighborCityInfo which contains the list of neighbor cities within user defined buffer miles of zip5.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipNeighborCityHttpGetIn"/>
+      <wsdl:output message="tns:GetZipNeighborCityHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;County query based on county fips or county_name + state_name. If fips is provided, it will search county based on fips. Otherwise, county_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of CountyInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCountyHttpGetIn"/>
+      <wsdl:output message="tns:GetCountyHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City query based on city fips or City_name + state_name. If fips is provided, it will search city based on fips. Otherwise, City_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of CityInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityHttpGetIn"/>
+      <wsdl:output message="tns:GetCityHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityBuffer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City neighbors query based on city name, state and buffer miles. It returns the result as a object instance of CityBufferInfo which contains the list of neighbor cities within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityBufferHttpGetIn"/>
+      <wsdl:output message="tns:GetCityBufferHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityNeighborZip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City neighbor Zips query based on city name, state abbr (e.g. TX) and buffer miles. It returns the result as a object instance of ZipBufferInfo which contains the list of neighbors within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityNeighborZipHttpGetIn"/>
+      <wsdl:output message="tns:GetCityNeighborZipHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolDistrict">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;SchoolDistrict query based on schoolDistrict_ID or schoolDistrict_name + state_name. If schoolDistrict_ID is provided, it will search school district based on schoolDistrict_ID. Otherwise, schoolDistrict_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of SchoolDistrictInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetSchoolDistrictHttpGetIn"/>
+      <wsdl:output message="tns:GetSchoolDistrictHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCensusTract">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Census Tract query based on censusTract_ID. It returns the result as a object instance of CensusTractInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCensusTractHttpGetIn"/>
+      <wsdl:output message="tns:GetCensusTractHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="Geocode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get the x, y coordinates based on input adddress. It returns the result as a object instance of Address.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Sign up to get the key now at &lt;a href='http://www.dyngeometry.com/web/LoginOrRegister.aspx' style="color: #ff0000"&gt;www.DynGeometry.com&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GeocodeHttpGetIn"/>
+      <wsdl:output message="tns:GeocodeHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GeocodePro">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get the x, y coordinates, city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division  based on input adddress. It returns the result as a object instance of AddressInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GeocodeProHttpGetIn"/>
+      <wsdl:output message="tns:GeocodeProHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="XYQuery">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division based on input x, y coordinates. It returns the result as a object instance of XYInfo. This function is only available for USA coordinates.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Sign up to get the key now at &lt;a href='http://www.dyngeometry.com/web/LoginOrRegister.aspx' style="color: #ff0000"&gt;www.DynGeometry.com&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:XYQueryHttpGetIn"/>
+      <wsdl:output message="tns:XYQueryHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="IPQuery">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;IP query based on IP Address. It returns the result as a object instance of IPInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:IPQueryHttpGetIn"/>
+      <wsdl:output message="tns:IPQueryHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="IPQueryPro">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;IP query based on IP Address. It returns the result as a object instance of IPInfoPro which includes city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division. This function is only available for USA IPs.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:IPQueryProHttpGetIn"/>
+      <wsdl:output message="tns:IPQueryProHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterOrLand">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Determin if the location is over water or land. It returns the result as a object instance of WaterOrLandInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetWaterOrLandHttpGetIn"/>
+      <wsdl:output message="tns:GetWaterOrLandHttpGetOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GeometryInfoHttpPost">
+    <wsdl:operation name="GetZip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip query based on 5 digit zip code. It returns the result as a object instance of ZipInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipHttpPostIn"/>
+      <wsdl:output message="tns:GetZipHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipBuffer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip neighbors query based on 5 digit zip code and buffer miles. It returns the result as a object instance of ZipBufferInfo which contains the list of neighbors within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipBufferHttpPostIn"/>
+      <wsdl:output message="tns:GetZipBufferHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipNeighborCity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Zip neighbor Cities query based on Zip5 and buffer miles. It returns the result as a object instance of ZipNeighborCityInfo which contains the list of neighbor cities within user defined buffer miles of zip5.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetZipNeighborCityHttpPostIn"/>
+      <wsdl:output message="tns:GetZipNeighborCityHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;County query based on county fips or county_name + state_name. If fips is provided, it will search county based on fips. Otherwise, county_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of CountyInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCountyHttpPostIn"/>
+      <wsdl:output message="tns:GetCountyHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City query based on city fips or City_name + state_name. If fips is provided, it will search city based on fips. Otherwise, City_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of CityInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityHttpPostIn"/>
+      <wsdl:output message="tns:GetCityHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityBuffer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City neighbors query based on city name, state and buffer miles. It returns the result as a object instance of CityBufferInfo which contains the list of neighbor cities within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityBufferHttpPostIn"/>
+      <wsdl:output message="tns:GetCityBufferHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityNeighborZip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;City neighbor Zips query based on city name, state abbr (e.g. TX) and buffer miles. It returns the result as a object instance of ZipBufferInfo which contains the list of neighbors within user defined buffer miles.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCityNeighborZipHttpPostIn"/>
+      <wsdl:output message="tns:GetCityNeighborZipHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolDistrict">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;SchoolDistrict query based on schoolDistrict_ID or schoolDistrict_name + state_name. If schoolDistrict_ID is provided, it will search school district based on schoolDistrict_ID. Otherwise, schoolDistrict_name + state_name will be used. Please use state abbr as state_name, such as TX. It returns the result as a object instance of SchoolDistrictInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetSchoolDistrictHttpPostIn"/>
+      <wsdl:output message="tns:GetSchoolDistrictHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCensusTract">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Census Tract query based on censusTract_ID. It returns the result as a object instance of CensusTractInfo which contains the geometry info to construct the polygon on Google Map.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetCensusTractHttpPostIn"/>
+      <wsdl:output message="tns:GetCensusTractHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="Geocode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get the x, y coordinates based on input adddress. It returns the result as a object instance of Address.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Sign up to get the key now at &lt;a href='http://www.dyngeometry.com/web/LoginOrRegister.aspx' style="color: #ff0000"&gt;www.DynGeometry.com&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GeocodeHttpPostIn"/>
+      <wsdl:output message="tns:GeocodeHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GeocodePro">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get the x, y coordinates, city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division  based on input adddress. It returns the result as a object instance of AddressInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GeocodeProHttpPostIn"/>
+      <wsdl:output message="tns:GeocodeProHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="XYQuery">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Get city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division based on input x, y coordinates. It returns the result as a object instance of XYInfo. This function is only available for USA coordinates.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Sign up to get the key now at &lt;a href='http://www.dyngeometry.com/web/LoginOrRegister.aspx' style="color: #ff0000"&gt;www.DynGeometry.com&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:XYQueryHttpPostIn"/>
+      <wsdl:output message="tns:XYQueryHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="IPQuery">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;IP query based on IP Address. It returns the result as a object instance of IPInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:IPQueryHttpPostIn"/>
+      <wsdl:output message="tns:IPQueryHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="IPQueryPro">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;IP query based on IP Address. It returns the result as a object instance of IPInfoPro which includes city, city fips, state, state fips, zipcode, county, county fips, county subdivision, school district, census tract, census block group, area code, traffic zone, voting district, core based statistical area, combined statistical area and metropolitan division. This function is only available for USA IPs.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:IPQueryProHttpPostIn"/>
+      <wsdl:output message="tns:IPQueryProHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterOrLand">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;table style='font-family:Verdana;color:#4D85C5;'&gt;&lt;tr&gt;&lt;td&gt;Determin if the location is over water or land. It returns the result as a object instance of WaterOrLandInfo.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetWaterOrLandHttpPostIn"/>
+      <wsdl:output message="tns:GetWaterOrLandHttpPostOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GeometryInfoSoap" type="tns:GeometryInfoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetZip">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetZip" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipBuffer">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetZipBuffer" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipNeighborCity">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetZipNeighborCity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounty">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetCounty" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCity">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetCity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityBuffer">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetCityBuffer" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityNeighborZip">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetCityNeighborZip" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolDistrict">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetSchoolDistrict" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCensusTract">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetCensusTract" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Geocode">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/Geocode" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeocodePro">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GeocodePro" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XYQuery">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/XYQuery" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQuery">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/IPQuery" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQueryPro">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/IPQueryPro" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterOrLand">
+      <soap:operation soapAction="http://www.DynGeometry.com/WebService/GetWaterOrLand" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GeometryInfoSoap12" type="tns:GeometryInfoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetZip">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetZip" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipBuffer">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetZipBuffer" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipNeighborCity">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetZipNeighborCity" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounty">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetCounty" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCity">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetCity" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityBuffer">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetCityBuffer" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityNeighborZip">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetCityNeighborZip" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolDistrict">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetSchoolDistrict" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCensusTract">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetCensusTract" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Geocode">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/Geocode" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeocodePro">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GeocodePro" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XYQuery">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/XYQuery" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQuery">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/IPQuery" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQueryPro">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/IPQueryPro" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterOrLand">
+      <soap12:operation soapAction="http://www.DynGeometry.com/WebService/GetWaterOrLand" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GeometryInfoHttpGet" type="tns:GeometryInfoHttpGet">
+    <http:binding verb="GET"/>
+    <wsdl:operation name="GetZip">
+      <http:operation location="/GetZip"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipBuffer">
+      <http:operation location="/GetZipBuffer"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipNeighborCity">
+      <http:operation location="/GetZipNeighborCity"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounty">
+      <http:operation location="/GetCounty"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCity">
+      <http:operation location="/GetCity"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityBuffer">
+      <http:operation location="/GetCityBuffer"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityNeighborZip">
+      <http:operation location="/GetCityNeighborZip"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolDistrict">
+      <http:operation location="/GetSchoolDistrict"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCensusTract">
+      <http:operation location="/GetCensusTract"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Geocode">
+      <http:operation location="/Geocode"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeocodePro">
+      <http:operation location="/GeocodePro"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XYQuery">
+      <http:operation location="/XYQuery"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQuery">
+      <http:operation location="/IPQuery"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQueryPro">
+      <http:operation location="/IPQueryPro"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterOrLand">
+      <http:operation location="/GetWaterOrLand"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GeometryInfoHttpPost" type="tns:GeometryInfoHttpPost">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="GetZip">
+      <http:operation location="/GetZip"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipBuffer">
+      <http:operation location="/GetZipBuffer"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZipNeighborCity">
+      <http:operation location="/GetZipNeighborCity"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounty">
+      <http:operation location="/GetCounty"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCity">
+      <http:operation location="/GetCity"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityBuffer">
+      <http:operation location="/GetCityBuffer"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityNeighborZip">
+      <http:operation location="/GetCityNeighborZip"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolDistrict">
+      <http:operation location="/GetSchoolDistrict"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCensusTract">
+      <http:operation location="/GetCensusTract"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Geocode">
+      <http:operation location="/Geocode"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeocodePro">
+      <http:operation location="/GeocodePro"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XYQuery">
+      <http:operation location="/XYQuery"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQuery">
+      <http:operation location="/IPQuery"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IPQueryPro">
+      <http:operation location="/IPQueryPro"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterOrLand">
+      <http:operation location="/GetWaterOrLand"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeometryInfo">
+    <wsdl:port name="GeometryInfoSoap" binding="tns:GeometryInfoSoap">
+      <soap:address location="http://www.dyngeometry.com/WebServiceV2/GeometryInfo.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="GeometryInfoSoap12" binding="tns:GeometryInfoSoap12">
+      <soap12:address location="http://www.dyngeometry.com/WebServiceV2/GeometryInfo.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="GeometryInfoHttpGet" binding="tns:GeometryInfoHttpGet">
+      <http:address location="http://www.dyngeometry.com/WebServiceV2/GeometryInfo.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="GeometryInfoHttpPost" binding="tns:GeometryInfoHttpPost">
+      <http:address location="http://www.dyngeometry.com/WebServiceV2/GeometryInfo.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
