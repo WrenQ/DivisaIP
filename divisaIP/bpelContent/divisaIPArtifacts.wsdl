@@ -25,7 +25,7 @@
             <element name="divisaIPRequest">
                 <complexType>
                     <sequence>
-                        <element name="input" type="string"/>
+                        <element name="direccionIP" type="string"/>
                     </sequence>
                 </complexType>
             </element>
@@ -33,10 +33,26 @@
             <element name="divisaIPResponse">
                 <complexType>
                     <sequence>
-                        <element name="result" type="string"/>
+                    	<element name="ciudad" type="string" />
+                    	<element name="pais" type="string"></element>
+                    	<element name="divisa" type="string"></element>
+                    	<element name="listaPaises"
+                    		type="tns:arrayPais">
+                    	</element>
+                    	<element name="idiomaPais" type="string"></element>
+                    	<element name="cambio" type="float"></element>
+                    	<element name="isoPais" type="string"></element>
                     </sequence>
                 </complexType>
             </element>
+        
+        
+        
+            <complexType name="arrayPais">
+            	<sequence>
+            		<element name="nombrePais" type="string" minOccurs="1" maxOccurs="888"></element>
+            	</sequence>
+            </complexType>
         </schema>
     </types>
 

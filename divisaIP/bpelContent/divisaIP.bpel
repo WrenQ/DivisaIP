@@ -48,6 +48,8 @@
         <bpel:variable name="CurrencyConvertorPLRequest" messageType="ns1:ConversionRateSoapIn"></bpel:variable>
         <bpel:variable name="CountryInfoServicePLResponse1" messageType="ns0:CountriesUsingCurrencySoapResponse"></bpel:variable>
         <bpel:variable name="CountryInfoServicePLRequest1" messageType="ns0:CountriesUsingCurrencySoapRequest"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLResponse2" messageType="ns0:CountryISOCodeSoapResponse"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLRequest2" messageType="ns0:CountryISOCodeSoapRequest"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -66,11 +68,138 @@
                  createInstance="yes"/>
         
         <!-- Generate reply to synchronous request -->
-        <bpel:assign validate="no" name="asignar_IP_servicio"></bpel:assign>
+        <bpel:assign validate="no" name="asignar_IP_servicio">
+            <bpel:copy>
+                <bpel:from><bpel:literal><tns:IPQuery xmlns:tns="http://www.DynGeometry.com/WebService/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:key>tns:key</tns:key>
+  <tns:IP>tns:IP</tns:IP>
+</tns:IPQuery>
+</bpel:literal></bpel:from>
+                <bpel:to variable="GeometryInfoPLRequest" part="parameters"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from part="payload" variable="input">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:direccionIP]]></bpel:query>
+                </bpel:from>
+                <bpel:to part="parameters" variable="GeometryInfoPLRequest">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:IP]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                    
+                    
+                    <![CDATA["ONCVBZTIKPUXZEJR6190"]]>
+                </bpel:from>
+                <bpel:to part="parameters" variable="GeometryInfoPLRequest">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[ns:key]]>
+                    </bpel:query>
+                </bpel:to>
+            </bpel:copy>
+        </bpel:assign>
         <bpel:invoke name="llamada_GeometryInfo" partnerLink="GeometryInfoPL" operation="IPQuery" portType="ns:GeometryInfoSoap" inputVariable="GeometryInfoPLRequest" outputVariable="GeometryInfoPLResponse"></bpel:invoke>
-        <bpel:assign validate="no" name="asignar_CiudadPais_servicio"></bpel:assign>
+        <bpel:assign validate="no" name="asignar_CiudadPais_servicio">
+            <bpel:copy>
+                <bpel:from><bpel:literal><tns:CountryISOCode xmlns:tns="http://www.oorsprong.org/websamples.countryinfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:sCountryName>tns:sCountryName</tns:sCountryName>
+</tns:CountryISOCode>
+</bpel:literal></bpel:from>
+                <bpel:to variable="CountryInfoServicePLRequest2" part="parameters"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from><bpel:literal><tns:divisaIPResponse xmlns:tns="http://ws.divisaip.tps" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:ciudad>tns:ciudad</tns:ciudad>
+  <tns:pais>tns:pais</tns:pais>
+  <tns:divisa>tns:divisa</tns:divisa>
+  <tns:listaPaises>
+    <tns:nombrePais>tns:nombrePais</tns:nombrePais>
+  </tns:listaPaises>
+  <tns:idiomaPais>tns:idiomaPais</tns:idiomaPais>
+  <tns:cambio>0.0</tns:cambio>
+</tns:divisaIPResponse>
+</bpel:literal></bpel:from>
+                <bpel:to variable="output" part="payload"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from part="parameters" variable="GeometryInfoPLResponse">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:IPQueryResult/ns:city]]></bpel:query>
+                </bpel:from>
+                <bpel:to part="payload" variable="output">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:ciudad]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from variable="GeometryInfoPLResponse">
+                </bpel:from>
+                <bpel:to part="payload" variable="output">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:pais]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from part="parameters" variable="GeometryInfoPLResponse">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:IPQueryResult/ns:country]]></bpel:query>
+                </bpel:from>
+                <bpel:to part="parameters" variable="CountryInfoServicePLRequest2">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns0:sCountryName]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+        </bpel:assign>
+        <bpel:invoke name="llamada_CountryInfoService_ISOPais" partnerLink="CountryInfoServicePL" operation="CountryISOCode" portType="ns0:CountryInfoServiceSoapType" inputVariable="CountryInfoServicePLRequest2" outputVariable="CountryInfoServicePLResponse2"></bpel:invoke>
+        <bpel:assign validate="no" name="asignar_ISOPais_service">
+            <bpel:copy>
+                <bpel:from><bpel:literal><tns:divisaIPResponse xmlns:tns="http://ws.divisaip.tps" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:ciudad>tns:ciudad</tns:ciudad>
+  <tns:pais>tns:pais</tns:pais>
+  <tns:divisa>tns:divisa</tns:divisa>
+  <tns:listaPaises>
+    <tns:nombrePais>tns:nombrePais</tns:nombrePais>
+  </tns:listaPaises>
+  <tns:idiomaPais>tns:idiomaPais</tns:idiomaPais>
+  <tns:cambio>0.0</tns:cambio>
+  <tns:isoPais>tns:isoPais</tns:isoPais>
+</tns:divisaIPResponse>
+</bpel:literal></bpel:from>
+                <bpel:to variable="output" part="payload"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from part="parameters" variable="CountryInfoServicePLResponse2">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns0:CountryISOCodeResult]]></bpel:query>
+                </bpel:from>
+                <bpel:to part="payload" variable="output">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:isoPais]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+        </bpel:assign>
         <bpel:invoke name="llamada_CountryInfoService" partnerLink="CountryInfoServicePL" operation="CountryCurrency" portType="ns0:CountryInfoServiceSoapType" inputVariable="CountryInfoServicePLRequest" outputVariable="CountryInfoServicePLResponse"></bpel:invoke>
-        <bpel:assign validate="no" name="asignar_divisa_servicio"></bpel:assign>
+        
+        <bpel:assign validate="no" name="asignar_divisa_servicio">
+            <bpel:copy>
+                <bpel:from><bpel:literal><tns:divisaIPResponse xmlns:tns="http://ws.divisaip.tps" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:ciudad>tns:ciudad</tns:ciudad>
+  <tns:pais>tns:pais</tns:pais>
+  <tns:divisa>tns:divisa</tns:divisa>
+  <tns:listaPaises>
+    <tns:nombrePais>tns:nombrePais</tns:nombrePais>
+  </tns:listaPaises>
+  <tns:idiomaPais>tns:idiomaPais</tns:idiomaPais>
+  <tns:cambio>0.0</tns:cambio>
+  <tns:isoPais>tns:isoPais</tns:isoPais>
+</tns:divisaIPResponse>
+</bpel:literal></bpel:from>
+                <bpel:to variable="output" part="payload"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from part="payload" variable="output">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[tns:isoPais]]>
+                    </bpel:query>
+                </bpel:from>
+                <bpel:to part="payload" variable="output">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:divisa]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+        </bpel:assign>
         <bpel:if name="if">
             <bpel:sequence name="Sequence">
                 <bpel:invoke name="llamada_CurrencyConvertor" partnerLink="CurrencyConvertorPL" operation="ConversionRate" portType="ns1:CurrencyConvertorSoap" inputVariable="CurrencyConvertorPLRequest" outputVariable="CurrencyConvertorPLResponse"></bpel:invoke>
