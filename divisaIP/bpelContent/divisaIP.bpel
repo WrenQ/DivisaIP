@@ -54,6 +54,8 @@
         
         <bpel:variable name="CurrencyConvertorPLResponse" messageType="ns1:ConversionRateSoapOut"></bpel:variable>
         <bpel:variable name="CurrencyConvertorPLRequest" messageType="ns1:ConversionRateSoapIn"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLResponse3" messageType="ns0:CountriesUsingCurrencySoapResponse"></bpel:variable>
+        <bpel:variable name="CountryInfoServicePLRequest3" messageType="ns0:CountriesUsingCurrencySoapRequest"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -620,8 +622,51 @@
             </bpel:sequence>
             <bpel:else>
                 <bpel:sequence name="Sequence1">
-                    <bpel:invoke name="llamada_CountryInfoService_EUR" partnerLink="CountryInfoServicePL" operation="CountriesUsingCurrency" portType="ns0:CountryInfoServiceSoapType" inputVariable="CountryInfoServicePLRequest1" outputVariable="CountryInfoServicePLResponse1"></bpel:invoke>
-                    <bpel:assign validate="no" name="asignar_PaisesEUR_servicio"></bpel:assign>
+                    <bpel:assign validate="no" name="asignar_divisa_servicioEUR">
+                        
+                        <bpel:copy>
+                            <bpel:from><bpel:literal><tns:CountriesUsingCurrency xmlns:tns="http://www.oorsprong.org/websamples.countryinfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:sISOCurrencyCode>tns:sISOCurrencyCode</tns:sISOCurrencyCode>
+</tns:CountriesUsingCurrency>
+</bpel:literal></bpel:from>
+                            <bpel:to variable="CountryInfoServicePLRequest3" part="parameters"></bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
+                            <bpel:from part="payload" variable="output">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:divisa]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to part="parameters" variable="CountryInfoServicePLRequest3">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns0:sISOCurrencyCode]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                    </bpel:assign>
+                    <bpel:invoke name="llamada_CountryInfoService_EUR" partnerLink="CountryInfoServicePL" operation="CountriesUsingCurrency" portType="ns0:CountryInfoServiceSoapType" inputVariable="CountryInfoServicePLRequest3" outputVariable="CountryInfoServicePLResponse3"></bpel:invoke>
+                    <bpel:assign validate="no" name="asignar_PaisesEUR_servicio">
+                        <bpel:copy>
+                            <bpel:from><bpel:literal><tns:divisaIPResponse xmlns:tns="http://ws.divisaip.tps" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:ciudad>tns:ciudad</tns:ciudad>
+  <tns:pais>tns:pais</tns:pais>
+  <tns:divisa>tns:divisa</tns:divisa>
+  <tns:listaPaises>
+    <tns:nombrePais>tns:nombrePais</tns:nombrePais>
+  </tns:listaPaises>
+  <tns:idiomaPais>tns:idiomaPais</tns:idiomaPais>
+  <tns:cambio>0.0</tns:cambio>
+  <tns:isoPais>tns:isoPais</tns:isoPais>
+  <tns:mensaje>tns:mensaje</tns:mensaje>
+</tns:divisaIPResponse>
+</bpel:literal></bpel:from>
+                            <bpel:to variable="output" part="payload"></bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
+                            <bpel:from part="parameters" variable="CountryInfoServicePLResponse3">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns0:CountriesUsingCurrencyResult]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to part="payload" variable="output">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:listaPaises]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                    </bpel:assign>
                     
                     <bpel:forEach parallel="no" counterName="Counter" name="ForEach">
                         <bpel:scope>
